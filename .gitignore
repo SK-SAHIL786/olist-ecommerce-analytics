@@ -1,1 +1,31 @@
+# ==========================
+# Python & Environments
+# ==========================
+__pycache__/[cite: 1]
+*.py[cod][cite: 1]
+venv/[cite: 1]
+.venv/[cite: 1]
 
+# ==========================
+# Jupyter Notebooks[cite: 1]
+# ==========================
+.ipynb_checkpoints/[cite: 1]
+
+# ==========================
+# Environment Variables & IDE[cite: 1]
+# ==========================
+.env[cite: 1]
+.vscode/[cite: 1]
+
+# ==========================
+# Datasets[cite: 1]
+# ==========================
+data/*.csv[cite: 1]
+/data/raw/*.csv[cite: 1]
+/data/processed/*.csv[cite: 1]
+
+# ==========================
+# Operating System Files[cite: 1]
+# ==========================
+.DS_Store[cite: 1]
+Thumbs.db[cite: 1]
