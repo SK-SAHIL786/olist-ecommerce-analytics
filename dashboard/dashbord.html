@@ -1,0 +1,242 @@
+
+/* ==================================
+   OLIST DARK PREMIUM DASHBOARD
+================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #080C18;
+    color: #E8EDF7;
+}
+
+.dashboard {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* SIDEBAR */
+
+.sidebar {
+    width: 250px;
+    min-width: 250px;
+    background: #0C1120;
+    border-right: 1px solid #202A40;
+    padding: 25px 18px;
+    display: flex;
+    flex-direction: column;
+}
+
+.logo {
+    color: #48DED3;
+    font-size: 27px;
+}
+
+.subtitle {
+    color: #8290A9;
+    font-size: 11px;
+    letter-spacing: 3px;
+    margin-bottom: 35px;
+}
+
+nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.nav-btn {
+    border: 1px solid transparent;
+    background: transparent;
+    padding: 14px;
+    border-radius: 9px;
+    text-align: left;
+    font-size: 14px;
+    color: #A5B0C5;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.nav-btn:hover {
+    background: #17233A;
+    color: #FFFFFF;
+}
+
+.nav-btn.active {
+    background: #142C3B;
+    color: #48DED3;
+    border-color: #24545A;
+    font-weight: bold;
+}
+
+.sidebar-footer {
+    margin-top: auto;
+    color: #8491A8;
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+/* MAIN CONTENT */
+
+.main-content {
+    flex: 1;
+    min-width: 0;
+    padding: 30px;
+}
+
+.topbar {
+    background: #10182A;
+    border: 1px solid #202A40;
+    padding: 20px;
+    border-radius: 13px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.topbar h1 {
+    font-size: 25px;
+    margin-bottom: 7px;
+    color: #F4F7FC;
+}
+
+.topbar p,
+.page > p {
+    color: #8492AA;
+    font-size: 13px;
+}
+
+.profile {
+    background: #203A56;
+    color: #48DED3;
+    border-radius: 50%;
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    font-weight: bold;
+}
+
+/* PAGES */
+
+.page {
+    display: none;
+}
+
+.page.active {
+    display: block;
+}
+
+.page > h2 {
+    color: #F4F7FC;
+    margin-bottom: 8px;
+}
+
+.page > p {
+    margin-bottom: 22px;
+}
+
+/* KPI CARDS */
+
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+    margin: 22px 0;
+}
+
+.kpi-card {
+    background: #111A2D;
+    border: 1px solid #26334C;
+    padding: 22px;
+    border-radius: 12px;
+    transition: 0.25s;
+}
+
+.kpi-card:hover {
+    transform: translateY(-4px);
+    border-color: #48DED3;
+}
+
+.kpi-card p {
+    color: #93A0B6;
+    font-size: 13px;
+    margin-bottom: 13px;
+}
+
+.kpi-card h2 {
+    color: #48DED3;
+    font-size: 25px;
+}
+
+/* CHARTS */
+
+.chart-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.chart-card {
+    background: #111A2D;
+    border: 1px solid #26334C;
+    padding: 22px;
+    border-radius: 12px;
+    margin-top: 20px;
+    min-width: 0;
+}
+
+.chart-card h3 {
+    color: #E8EDF7;
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+.chart-card canvas {
+    width: 100% !important;
+    max-height: 320px;
+}
+
+/* RESPONSIVE DESIGN */
+
+@media (max-width: 1000px) {
+    .kpi-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 700px) {
+    .dashboard {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        min-width: 0;
+    }
+
+    nav {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .main-content {
+        padding: 15px;
+    }
+
+    .chart-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 420px) {
+    .kpi-grid {
+        grid-template-columns: 1fr;
+    }
+}
