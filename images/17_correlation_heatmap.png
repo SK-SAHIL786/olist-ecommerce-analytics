@@ -1,0 +1,19 @@
+
+correlation_data = items[
+    ["price", "freight_value"]
+].corr()
+
+plt.figure(figsize=(8, 6))
+sns.heatmap(
+    correlation_data,
+    annot=True,
+    cmap="coolwarm",
+    fmt=".2f"
+)
+
+plt.title("Price and Freight Correlation Heatmap", fontsize=17)
+
+plt.tight_layout()
+plt.savefig(IMAGE_DIR / "16_correlation_heatmap.png",
+            dpi=200, facecolor=BG)
+plt.show()
