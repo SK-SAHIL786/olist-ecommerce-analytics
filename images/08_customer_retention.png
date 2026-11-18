@@ -1,0 +1,24 @@
+
+customer_orders = (
+    customers.merge(orders, on="customer_id")
+    .query("order_status == 'delivered'")
+    .groupby("customer_unique_id")["order_id"]
+    .nunique()
+)
+
+repeat = (customer_orders > 1).sum()
+one_time = (customer_orders == 1).sum()
+
+plt.figure(figsize=(8, 6))
+plt.pie(
+    [repeat, one_time],
+    labels=["Repeat Customers", "One-time Customers"],
+    autopct="%1.1f%%",
+    colors=[CYAN, PURPLE],
+    startangle=90
+)
+
+plt.title("Customer Retention Analysis", fontsize=17)
+plt.savefig(IMAGE_DIR / "07_customer_retention.png",
+            dpi=200, facecolor=BG)
+plt.show()
