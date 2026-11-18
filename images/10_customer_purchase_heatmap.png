@@ -1,0 +1,37 @@
+
+purchase = orders.dropna(
+    subset=["order_purchase_timestamp"]
+).copy()
+
+purchase["weekday"] = purchase[
+    "order_purchase_timestamp"
+].dt.day_name()
+
+purchase["hour"] = purchase[
+    "order_purchase_timestamp"
+].dt.hour
+
+heatmap_data = purchase.pivot_table(
+    index="weekday",
+    columns="hour",
+    values="order_id",
+    aggfunc="count",
+    fill_value=0
+)
+
+days = ["Monday", "Tuesday", "Wednesday",
+        "Thursday", "Friday", "Saturday", "Sunday"]
+
+heatmap_data = heatmap_data.reindex(days)
+
+plt.figure(figsize=(14, 6))
+sns.heatmap(heatmap_data, cmap="mako")
+
+plt.title("Customer Purchase Heatmap", fontsize=17)
+plt.xlabel("Purchase Hour")
+plt.ylabel("Weekday")
+
+plt.tight_layout()
+plt.savefig(IMAGE_DIR / "09_customer_purchase_heatmap.png",
+            dpi=200, facecolor=BG)
+plt.show()
