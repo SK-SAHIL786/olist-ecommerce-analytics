@@ -1,0 +1,16 @@
+
+review_counts = reviews["review_score"].value_counts().sort_index()
+
+plt.figure(figsize=(9, 5))
+plt.bar(review_counts.index, review_counts.values,
+        color=[PINK, ORANGE, BLUE, PURPLE, CYAN])
+
+plt.title("Customer Review Score Distribution", fontsize=17)
+plt.xlabel("Review Score")
+plt.ylabel("Number of Reviews")
+plt.xticks([1, 2, 3, 4, 5])
+
+plt.tight_layout()
+plt.savefig(IMAGE_DIR / "14_review_score_distribution.png",
+            dpi=200, facecolor=BG)
+plt.show()
