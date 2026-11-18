@@ -1,0 +1,24 @@
+
+seller_data = delivered_items.merge(
+    sellers[["seller_id", "seller_state"]],
+    on="seller_id"
+)
+
+top_sellers = (
+    seller_data.groupby("seller_id")["price"]
+    .sum()
+    .nlargest(10)
+    .sort_values()
+)
+
+plt.figure(figsize=(11, 6))
+top_sellers.plot(kind="barh", color=CYAN)
+
+plt.title("Top 10 Sellers by Revenue", fontsize=17)
+plt.xlabel("Revenue (R$)")
+plt.ylabel("Seller ID")
+
+plt.tight_layout()
+plt.savefig(IMAGE_DIR / "10_top_sellers_by_revenue.png",
+            dpi=200, facecolor=BG)
+plt.show()
