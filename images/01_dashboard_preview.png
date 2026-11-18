@@ -1,0 +1,27 @@
+
+fig, ax = plt.subplots(figsize=(14, 7))
+ax.set_facecolor(BG)
+ax.axis("off")
+
+ax.text(0.5, 0.75, "OLIST E-COMMERCE ANALYTICS",
+        ha="center", fontsize=28, weight="bold", color=CYAN,
+        transform=ax.transAxes)
+
+ax.text(0.5, 0.58, "DARK PREMIUM BUSINESS INTELLIGENCE",
+        ha="center", fontsize=15, color=WHITE,
+        transform=ax.transAxes)
+
+ax.text(0.5, 0.38,
+        f"Delivered Revenue: R$ {total_revenue:,.2f}",
+        ha="center", fontsize=19, color=CYAN,
+        transform=ax.transAxes)
+
+ax.text(0.5, 0.27,
+        f"Delivered Orders: {total_orders:,}",
+        ha="center", fontsize=16, color=PURPLE,
+        transform=ax.transAxes)
+
+plt.savefig(IMAGE_DIR / "00_dashboard_preview.png",
+            dpi=200, bbox_inches="tight", facecolor=BG)
+plt.show()
+
