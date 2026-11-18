@@ -1,0 +1,42 @@
+
+late_percentage = (
+    delivery_check["delivery_status"].eq("Late").mean() * 100
+)
+
+repeat_percentage = (
+    repeat / (repeat + one_time) * 100
+)
+
+top_category = (
+    delivered_items.groupby("category")["price"]
+    .sum().idxmax()
+)
+
+top_state = state_revenue.idxmax()
+
+insights = [
+    f"Delivered revenue: R$ {total_revenue:,.2f}",
+    f"Delivered orders: {total_orders:,}",
+    f"Repeat customer rate: {repeat_percentage:.2f}%",
+    f"Late delivery rate: {late_percentage:.2f}%",
+    f"Average review score: {avg_review:.2f}/5",
+    f"Top product category: {top_category}",
+    f"Top customer state: {top_state}"
+]
+
+fig, ax = plt.subplots(figsize=(12, 7))
+ax.axis("off")
+
+ax.text(0.05, 0.92, "OLIST BUSINESS INSIGHTS",
+        fontsize=22, weight="bold", color=CYAN,
+        transform=ax.transAxes)
+
+for i, insight in enumerate(insights):
+    ax.text(0.07, 0.78 - i * 0.10,
+            f"{i+1}. {insight}",
+            fontsize=13, color=WHITE,
+            transform=ax.transAxes)
+
+plt.savefig(IMAGE_DIR / "18_business_insights.png",
+            dpi=200, bbox_inches="tight", facecolor=BG)
+plt.show()
