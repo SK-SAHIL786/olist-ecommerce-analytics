@@ -1,0 +1,32 @@
+
+review_order = (
+    reviews.groupby("order_id")["review_score"]
+    .mean().reset_index()
+)
+
+delivery_review = delivery_check.merge(
+    review_order, on="order_id"
+)
+
+delivery_review["delivery_status"] = np.where(
+    delivery_review["order_delivered_customer_date"] >
+    delivery_review["order_estimated_delivery_date"],
+    "Late", "On Time"
+)
+
+score_data = delivery_review.groupby(
+    "delivery_status"
+)["review_score"].mean()
+
+plt.figure(figsize=(8, 5))
+score_data.plot(kind="bar", color=[CYAN, ORANGE])
+
+plt.title("Delivery Performance vs Review Score", fontsize=17)
+plt.xlabel("Delivery Status")
+plt.ylabel("Average Review Score")
+plt.xticks(rotation=0)
+
+plt.tight_layout()
+plt.savefig(IMAGE_DIR / "15_delivery_vs_review_score.png",
+            dpi=200, facecolor=BG)
+plt.show()
