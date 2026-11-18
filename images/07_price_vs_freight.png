@@ -1,0 +1,15 @@
+
+plt.figure(figsize=(10, 6))
+
+plt.scatter(items["price"], items["freight_value"],
+            alpha=0.25, color=CYAN, s=12)
+
+plt.title("Product Price vs Freight Value", fontsize=17)
+plt.xlabel("Product Price (R$)")
+plt.ylabel("Freight Value (R$)")
+plt.grid(alpha=0.15)
+
+plt.tight_layout()
+plt.savefig(IMAGE_DIR / "06_price_vs_freight.png",
+            dpi=200, facecolor=BG)
+plt.show()
