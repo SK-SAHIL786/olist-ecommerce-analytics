@@ -1,0 +1,20 @@
+
+category_data = (
+    delivered_items.groupby("category")["price"]
+    .sum()
+    .nlargest(10)
+    .sort_values()
+)
+
+plt.figure(figsize=(12, 6))
+category_data.plot(kind="barh", color=PURPLE)
+
+plt.title("Top 10 Product Categories by Revenue",
+          fontsize=17, weight="bold")
+plt.xlabel("Revenue (R$)")
+plt.ylabel("Category")
+
+plt.tight_layout()
+plt.savefig(IMAGE_DIR / "03_top_product_categories.png",
+            dpi=200, facecolor=BG)
+plt.show()
