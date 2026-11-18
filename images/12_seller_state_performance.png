@@ -1,0 +1,19 @@
+
+seller_state = (
+    seller_data.groupby("seller_state")["price"]
+    .sum()
+    .sort_values(ascending=False)
+)
+
+plt.figure(figsize=(10, 6))
+seller_state.plot(kind="bar", color=BLUE)
+
+plt.title("Seller State Performance", fontsize=17)
+plt.xlabel("Seller State")
+plt.ylabel("Revenue (R$)")
+plt.xticks(rotation=45)
+
+plt.tight_layout()
+plt.savefig(IMAGE_DIR / "11_seller_state_performance.png",
+            dpi=200, facecolor=BG)
+plt.show()
