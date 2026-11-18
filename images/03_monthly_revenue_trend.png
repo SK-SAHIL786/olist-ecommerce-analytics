@@ -1,0 +1,25 @@
+
+monthly = delivered_orders.merge(
+    items, on="order_id"
+)
+
+monthly["month"] = (
+    monthly["order_purchase_timestamp"].dt.to_period("M").astype(str)
+)
+
+monthly_data = monthly.groupby("month")["price"].sum()
+
+plt.figure(figsize=(13, 5))
+plt.plot(monthly_data.index, monthly_data.values,
+         marker="o", color=CYAN, linewidth=2.5)
+
+plt.title("Monthly Revenue Trend", fontsize=18, weight="bold")
+plt.xlabel("Month")
+plt.ylabel("Revenue (R$)")
+plt.xticks(rotation=45)
+plt.grid(alpha=0.15)
+
+plt.tight_layout()
+plt.savefig(IMAGE_DIR / "02_monthly_revenue_trend.png",
+            dpi=200, facecolor=BG)
+plt.show()
