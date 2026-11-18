@@ -1,0 +1,42 @@
+
+rfm_orders = customers.merge(
+    delivered_orders[["order_id", "customer_id",
+                      "order_purchase_timestamp"]],
+    on="customer_id"
+)
+
+reference_date = rfm_orders["order_purchase_timestamp"].max()
+
+rfm = rfm_orders.groupby("customer_unique_id").agg(
+    Recency=("order_purchase_timestamp",
+             lambda x: (reference_date - x.max()).days),
+    Frequency=("order_id", "nunique")
+)
+
+customer_spend = (
+    rfm_orders.merge(items[["order_id", "price"]], on="order_id")
+    .groupby("customer_unique_id")["price"].sum()
+)
+
+rfm["Monetary"] = customer_spend
+rfm = rfm.dropna()
+
+rfm_scaled = StandardScaler().fit_transform(
+    np.log1p(rfm[["Recency", "Frequency", "Monetary"]])
+)
+
+model = KMeans(n_clusters=4, random_state=42, n_init=10)
+rfm["Segment"] = model.fit_predict(rfm_scaled)
+
+rfm["Segment"].value_counts().sort_index().plot(
+    kind="bar", color=PURPLE, figsize=(9, 5)
+)
+
+plt.title("RFM Customer Segments", fontsize=17)
+plt.xlabel("Segment")
+plt.ylabel("Customers")
+
+plt.tight_layout()
+plt.savefig(IMAGE_DIR / "08_customer_segments.png",
+            dpi=200, facecolor=BG)
+plt.show()
